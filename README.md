@@ -18,6 +18,9 @@ ShareGPT / UltraChat 采样 → target 重新生成 → online 训练 1 层 draf
 
 > 最后一行的 1.761x **超过了腾讯 AngelSlim 官方在 H20 上公布的 1.687x**，而且我们用的是消费级 4080S。
 
+**🤗 模型已发布到 HuggingFace：[Lichen-Creator/Qwen3-1.7B_eagle3](https://huggingface.co/Lichen-Creator/Qwen3-1.7B_eagle3)**
+（v2 draft，可直接被 SGLang 0.5.9 / vLLM 0.11.2 加载）
+
 ---
 
 ## 关键洞察：2x 需要什么
