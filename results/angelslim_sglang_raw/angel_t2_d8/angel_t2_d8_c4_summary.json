@@ -1,0 +1,37 @@
+{
+  "c": 4,
+  "requests": 120,
+  "ok": 0,
+  "failed": 120,
+  "wall_s": 0.038777267560362816,
+  "output_tokens": 0,
+  "throughput_tokens_s": 0.0,
+  "ttft_s": {
+    "mean": null,
+    "p50": null,
+    "p90": null,
+    "p99": null
+  },
+  "latency_s": {
+    "mean": null,
+    "p50": null,
+    "p90": null,
+    "p99": null
+  },
+  "tpot_s": {
+    "mean": null,
+    "p50": null,
+    "p90": null,
+    "p99": null
+  },
+  "spec_accept_length": {
+    "mean": null,
+    "n": 0,
+    "p50": null
+  },
+  "spec_accept_rate": {
+    "mean": null,
+    "n": 0,
+    "p50": null
+  }
+}
