@@ -32,9 +32,9 @@ No conversion required.
 - **Ready to deploy**: standard EAGLE-3 checkpoint (`d2t` / `t2d` included), loads directly in SGLang 0.5.9
   and vLLM 0.11.2 — both verified
 - **No proprietary embedding**: shares the target model's `embed_tokens`, only 274 MB on disk
-- **1.879x end-to-end speedup** with vLLM on a consumer RTX 4080 SUPER (1024-token outputs, C=1),
-  acceptance 2.33
-- **Ahead of the reference release on the same hardware**: 282.4 vs 264.7 tok/s (1024 tok, vLLM),
+- **🎯 2.135x end-to-end speedup** with vLLM on a consumer **RTX 4080 SUPER** (1024-token outputs, C=1,
+  `num_speculative_tokens=4`) — acceptance 2.89, baseline 150.3 → **321.0 tok/s**
+- **Ahead of the reference release on the same hardware**: 282.4 vs 264.7 tok/s (1024 tok, vLLM, n=2),
   and acceptance 2.175 vs 2.111 (SGLang, RTX 4080S)
 - Loads as `LlamaForCausalLMEagle3` in SGLang and as `Detected EAGLE model without its own embed_tokens`
   in vLLM, no conversion needed
@@ -132,13 +132,22 @@ ignore_eos=True`), identical sampling for baseline and EAGLE.
 
 ### vLLM 0.11.2 — RTX 4080 SUPER 32GB
 
-`--speculative-config '{"model": "Lichen-Creator/Qwen3-1.7B_eagle3", "num_speculative_tokens": 2}'`
+```bash
+--speculative-config '{"model": "Lichen-Creator/Qwen3-1.7B_eagle3", "num_speculative_tokens": 4}'
+```
 
-| Output length | baseline tok/s | **this model** | Speedup | Acceptance |
-|---|---|---|---|---|
-| 128 tokens, C=1 | 152.3 | **242.1** | **1.590x** | 2.33 |
-| 128 tokens, C=4 | 565.0 | **852.8** | **1.509x** | 2.33 |
-| 1024 tokens, C=1 | 150.3 | **282.4** | **1.879x** | 2.33 |
+| Output length | `n` | baseline tok/s | **this model** | Speedup | Acceptance |
+|---|---|---|---|---|---|
+| 128 tokens, C=1 | 2 | 152.3 | **242.1** | **1.590x** | 2.33 |
+| 128 tokens, C=1 | 3 | 152.3 | **255.2** | **1.676x** | 2.72 |
+| 128 tokens, C=4 | 2 | 565.0 | **852.8** | **1.509x** | 2.33 |
+| 1024 tokens, C=1 | 2 | 150.3 | **282.4** | **1.879x** | 2.33 |
+| 1024 tokens, C=1 | 3 | 150.3 | **308.3** | **2.051x** | 2.72 |
+| **1024 tokens, C=1** | **4** | 150.3 | **321.0** | **🎯 2.135x** | **2.89** |
+
+> **Recommended setting**: long outputs → `num_speculative_tokens=4`; short outputs (≤128 tok) → `3`
+> (where 1.676x beats 1.637x). Longer generations amortize the per-cycle verification cost, so more
+> speculated tokens pay off.
 
 ### Versus the reference release
 
@@ -148,8 +157,8 @@ Same card (4080S), same engine, same benchmark, each with its own weights:
 |---|---|---|---|
 | SGLang 0.5.9 | acceptance (k=3) | **2.175** | 2.111 |
 | SGLang 0.5.9 | speedup | **1.219x** | 1.149x |
-| vLLM 0.11.2 | throughput, 1024 tok | **282.4 tok/s** | 264.7 tok/s |
-| vLLM 0.11.2 | speedup, 1024 tok | **1.879x** | 1.761x |
+| vLLM 0.11.2, n=2 | throughput, 1024 tok | **282.4 tok/s** | 264.7 tok/s |
+| vLLM 0.11.2, n=2 | speedup, 1024 tok | **1.879x** | 1.761x |
 
 **+6.7% throughput over the reference checkpoint under vLLM**, +5.7% under SGLang.
 

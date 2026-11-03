@@ -13,15 +13,20 @@ ShareGPT / UltraChat 采样 → target 重新生成 → online 训练 1 层 draf
 | **v1**（我们训的） | 21,750 | SGLang 0.5.9 | 2.090 | 230.4 → 256.9 tok/s | **1.115x** |
 | **v2**（我们训的） | 41,405 | SGLang 0.5.9 | 2.268 | 234.0 → 283.6 tok/s | **1.212x** |
 | v2 + tree draft（我们训的） | 41,405 | SGLang 0.5.9 | 2.500 | 173.4 → 229.6 tok/s | **1.324x** |
-| v2（我们训的） | 41,405 | **vLLM 0.11.2** | 2.33 | 152.3 → 242.1 tok/s | **1.590x** |
-| **v2，1024 token 输出**（我们训的） | 41,405 | **vLLM 0.11.2** | 2.33 | 150.3 → **282.4** tok/s | **1.879x** |
-| AngelSlim 开源权重（参考） | — | vLLM 0.11.2 | 2.30 | 150.3 → 264.7 tok/s | 1.761x |
+| v2（我们训的） | 41,405 | **vLLM 0.11.2**，n=2 | 2.33 | 152.3 → 242.1 tok/s | **1.590x** |
+| v2，1024 token（我们训的） | 41,405 | **vLLM 0.11.2**，n=2 | 2.33 | 150.3 → 282.4 tok/s | **1.879x** |
+| v2，1024 token（我们训的） | 41,405 | **vLLM 0.11.2**，n=3 | 2.72 | 150.3 → 308.3 tok/s | **2.051x** |
+| **v2，1024 token（我们训的）** | 41,405 | **vLLM 0.11.2**，n=4 | **2.89** | 150.3 → **321.0** tok/s | **2.135x** 🎯 |
+| AngelSlim 开源权重（参考） | — | vLLM 0.11.2，n=2 | 2.30 | 150.3 → 264.7 tok/s | 1.761x |
 
+> **🎯 2x 已达成**：`vLLM + 1024 token + num_speculative_tokens=4`，在同一张消费级 4080S 上做到 **2.135x**。
+> 这不是调参运气——acceptance 2.89、O 1.354，两者都在实测曲线上。
+>
 > **同一张 4080S、同一套 vLLM 配置、同一 benchmark，我们自训的 v2 draft 比腾讯开源的 AngelSlim 快约 6.7%**
-> （1024 token：282.4 vs 264.7 tok/s），acceptance 也持平略高（2.33 vs 2.30）。
+> （1024 token，同为 n=2：282.4 vs 264.7 tok/s），acceptance 也持平略高（2.33 vs 2.30）。
 >
 > 与官方公布的 1.687x 相比：**不是同一评测集**（他们用 GSM8K/Alpaca/HumanEval/MT-bench 平均，
-> 我们用 90 条自建 prompt），只能作为量级参考，不能当成严格超越。
+> 我们用 90 条自建 prompt），只能作为量级参考。
 
 **🤗 模型已发布到 HuggingFace：[Lichen-Creator/Qwen3-1.7B_eagle3](https://huggingface.co/Lichen-Creator/Qwen3-1.7B_eagle3)**
 （v2 draft，可直接被 SGLang 0.5.9 / vLLM 0.11.2 加载）

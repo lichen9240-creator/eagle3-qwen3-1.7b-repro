@@ -1,0 +1,8 @@
+{
+ "conc": 1,
+ "max_tokens": 1024,
+ "n": 24,
+ "throughput_tokens_s": 308.3184133277094,
+ "latency_mean_ms": 3321.1590393135943,
+ "accept_len": 1.5687348379034036
+}
