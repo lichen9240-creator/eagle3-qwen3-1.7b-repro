@@ -234,6 +234,9 @@ CUDA_VISIBLE_DEVICES=0 torchrun --standalone --nproc_per_node=1 \
 
 ## 4. 导出与部署
 
+> **省事做法**：直接下载 Release 里的 `draft-v1-sglang.tar.gz` / `draft-v2-sglang.tar.gz`，
+> 解压后就是完整的 SGLang draft 目录（config.json + model.safetensors），跳过第 3 节的训练。
+
 ```bash
 CKPT=$(ls -d $ROOT/runs/qwen3-1.7b-eagle3-42k/epoch_* | sort -V | tail -1)
 mkdir -p $ROOT/exports/qwen3-1.7b-eagle3-v2-42k
