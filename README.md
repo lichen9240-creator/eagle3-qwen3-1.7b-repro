@@ -13,19 +13,15 @@ ShareGPT / UltraChat 采样 → target 重新生成 → online 训练 1 层 draf
 | **v1**（我们训的） | 21,750 | SGLang 0.5.9 | 2.090 | 230.4 → 256.9 tok/s | **1.115x** |
 | **v2**（我们训的） | 41,405 | SGLang 0.5.9 | 2.268 | 234.0 → 283.6 tok/s | **1.212x** |
 | v2 + tree draft（我们训的） | 41,405 | SGLang 0.5.9 | 2.500 | 173.4 → 229.6 tok/s | **1.324x** |
-| AngelSlim 参考权重 † | — | **vLLM 0.11.2** | 2.22–2.37 | 152.3 → 233.6 tok/s | **1.534x** |
-| AngelSlim 参考权重 †，1024 token 输出 | — | **vLLM 0.11.2** | ~2.4 | 150.3 → 264.7 tok/s | **1.761x** |
+| v2（我们训的） | 41,405 | **vLLM 0.11.2** | 2.33 | 152.3 → 242.1 tok/s | **1.590x** |
+| **v2，1024 token 输出**（我们训的） | 41,405 | **vLLM 0.11.2** | 2.33 | 150.3 → **282.4** tok/s | **1.879x** |
+| AngelSlim 开源权重（参考） | — | vLLM 0.11.2 | 2.30 | 150.3 → 264.7 tok/s | 1.761x |
 
-> † **这两行 vLLM 数据是拿腾讯 AngelSlim 开源的 draft 权重在我们机器上跑的**，用于隔离"引擎差异"——
-> **我们自训的 v2 draft 还没有在 vLLM 上测过**（只在 SGLang 上测）。
-> 它们的意义是：同一张卡、同一份权重，换引擎能让加速比从 1.149x 变成 1.534x/1.761x。
-> 所以"1.761x"证明的是**推理栈的潜力**，不是"我们的模型能跑 1.761x"；我们的模型目前保底是 SGLang 上的 1.212x / 1.324x(tree)。
+> **同一张 4080S、同一套 vLLM 配置、同一 benchmark，我们自训的 v2 draft 比腾讯开源的 AngelSlim 快约 6.7%**
+> （1024 token：282.4 vs 264.7 tok/s），acceptance 也持平略高（2.33 vs 2.30）。
 >
-> 另外注意：1.761x 与官方公布的 1.687x **不是同一评测集**（他们用 GSM8K/Alpaca/HumanEval/MT-bench，
+> 与官方公布的 1.687x 相比：**不是同一评测集**（他们用 GSM8K/Alpaca/HumanEval/MT-bench 平均，
 > 我们用 90 条自建 prompt），只能作为量级参考，不能当成严格超越。
-
-**🤗 模型已发布到 HuggingFace：[Lichen-Creator/Qwen3-1.7B_eagle3](https://huggingface.co/Lichen-Creator/Qwen3-1.7B_eagle3)**
-（v2 draft；已在 SGLang 0.5.9 上验证，vLLM 侧尚未实测）
 
 **🤗 模型已发布到 HuggingFace：[Lichen-Creator/Qwen3-1.7B_eagle3](https://huggingface.co/Lichen-Creator/Qwen3-1.7B_eagle3)**
 （v2 draft，可直接被 SGLang 0.5.9 / vLLM 0.11.2 加载）
