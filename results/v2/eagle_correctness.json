@@ -1,0 +1,312 @@
+[
+  {
+    "id": "chat-001",
+    "category": "chat",
+    "text": "Multi-head self-attention in a Transformer allows the model to focus on different parts of the input simultaneously. Imagine you're looking at a sentence and want to understand both the main idea and specific details. Each head acts like a different \"view\" of the sentence, capturing different aspects. For example, one head might focus",
+    "meta": {
+      "id": "96ccad78192e4dddae3eb27ab23a754d",
+      "finish_reason": {
+        "type": "length",
+        "length": 64
+      },
+      "prompt_tokens": 68,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 64,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.24869322776794434,
+      "spec_accept_rate": 0.36666666666666664,
+      "spec_accept_length": 2.1333333333333333,
+      "spec_accept_token_num": 33,
+      "spec_draft_token_num": 90,
+      "spec_verify_ct": 30,
+      "spec_accept_histogram": [
+        10,
+        12,
+        3,
+        5
+      ],
+      "response_sent_to_client_ts": 1793701936.1391401
+    }
+  },
+  {
+    "id": "chat-002",
+    "category": "chat",
+    "text": "KV caching and recomputing the full context on every decoding step are two approaches to manage the memory usage in large language models during decoding. KV caching stores key-value pairs of the last few tokens' attention weights, reducing memory consumption by reusing these values across multiple steps. This is particularly effective for long-context documents,",
+    "meta": {
+      "id": "d1b4bd79f2944428be2bc5a442af3c29",
+      "finish_reason": {
+        "type": "length",
+        "length": 64
+      },
+      "prompt_tokens": 68,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 64,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.29678821563720703,
+      "spec_accept_rate": 0.24324324324324326,
+      "spec_accept_length": 1.7297297297297298,
+      "spec_accept_token_num": 27,
+      "spec_draft_token_num": 111,
+      "spec_verify_ct": 37,
+      "spec_accept_histogram": [
+        17,
+        15,
+        3,
+        2
+      ],
+      "response_sent_to_client_ts": 1793701936.4408877
+    }
+  },
+  {
+    "id": "chat-003",
+    "category": "chat",
+    "text": "Speculative decoding is a technique used in machine translation and sequence modeling to improve efficiency by predicting future outputs before the full sequence is fully generated. In this approach, the model generates a hypothesis and then checks if it is correct. If the hypothesis is correct, it is accepted and used for the final output; if not,",
+    "meta": {
+      "id": "86b0561fc474407793081d9ba8f04bcf",
+      "finish_reason": {
+        "type": "length",
+        "length": 64
+      },
+      "prompt_tokens": 71,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 64,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.3029289245605469,
+      "spec_accept_rate": 0.26126126126126126,
+      "spec_accept_length": 1.7297297297297298,
+      "spec_accept_token_num": 29,
+      "spec_draft_token_num": 111,
+      "spec_verify_ct": 37,
+      "spec_accept_histogram": [
+        20,
+        10,
+        2,
+        5
+      ],
+      "response_sent_to_client_ts": 1793701936.7463877
+    }
+  },
+  {
+    "id": "chat-004",
+    "category": "chat",
+    "text": "Post-training quantization reduces model parameters to lower bit-widths (e.g., 8-bit), improving inference speed and reducing memory usage but potentially lowering accuracy. Weight-only quantization focuses on quantizing only the weights, which can be more efficient for models with sparse weights, but may require additional steps to quantize activations",
+    "meta": {
+      "id": "5ce30dfa090c4afc8581dc4a3bae9b3e",
+      "finish_reason": {
+        "type": "length",
+        "length": 64
+      },
+      "prompt_tokens": 68,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 64,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.31824445724487305,
+      "spec_accept_rate": 0.19166666666666668,
+      "spec_accept_length": 1.6,
+      "spec_accept_token_num": 23,
+      "spec_draft_token_num": 120,
+      "spec_verify_ct": 40,
+      "spec_accept_histogram": [
+        24,
+        12,
+        1,
+        3
+      ],
+      "response_sent_to_client_ts": 1793701937.0672574
+    }
+  },
+  {
+    "id": "chat-005",
+    "category": "chat",
+    "text": "When deciding between retrieval-augmented generation (RAG) and fine-tuning, consider the following framework:\n\n1. **Data Freshness**: RAG is better for up-to-date information, while fine-tuning may require retraining on older data. For example, a legal team using RAG for recent case law",
+    "meta": {
+      "id": "98e60bb775c74b809c0e3f6545e0cc80",
+      "finish_reason": {
+        "type": "length",
+        "length": 64
+      },
+      "prompt_tokens": 69,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 64,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.24660968780517578,
+      "spec_accept_rate": 0.37777777777777777,
+      "spec_accept_length": 2.1333333333333333,
+      "spec_accept_token_num": 34,
+      "spec_draft_token_num": 90,
+      "spec_verify_ct": 30,
+      "spec_accept_histogram": [
+        11,
+        7,
+        9,
+        3
+      ],
+      "response_sent_to_client_ts": 1793701937.3182397
+    }
+  },
+  {
+    "id": "chat-006",
+    "category": "chat",
+    "text": "The CAP theorem states that in a distributed system, it is impossible to simultaneously guarantee both consistency and availability for all operations. The theorem introduces three key properties: **Consistency** (all nodes see the same data), **Availability** (all nodes are always available), and **Partition Tolerance** (the system continues to",
+    "meta": {
+      "id": "e1a7257d47c144ca83801a6c3816fcf2",
+      "finish_reason": {
+        "type": "length",
+        "length": 64
+      },
+      "prompt_tokens": 57,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 64,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.2554607391357422,
+      "spec_accept_rate": 0.3333333333333333,
+      "spec_accept_length": 2.0,
+      "spec_accept_token_num": 32,
+      "spec_draft_token_num": 96,
+      "spec_verify_ct": 32,
+      "spec_accept_histogram": [
+        13,
+        11,
+        3,
+        5
+      ],
+      "response_sent_to_client_ts": 1793701937.5782046
+    }
+  },
+  {
+    "id": "chat-007",
+    "category": "chat",
+    "text": "A B-tree index speeds up a relational database query by allowing the database to quickly locate specific data. Page locality refers to the fact that a B-tree index stores data in pages, which are stored on disk, and the database can access these pages more efficiently by reading them in blocks. Selectivity is the ability of an",
+    "meta": {
+      "id": "ec1a1fb41fdb44cc9b55cc8ad485770a",
+      "finish_reason": {
+        "type": "length",
+        "length": 64
+      },
+      "prompt_tokens": 64,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 64,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.3037285804748535,
+      "spec_accept_rate": 0.21929824561403508,
+      "spec_accept_length": 1.6842105263157894,
+      "spec_accept_token_num": 25,
+      "spec_draft_token_num": 114,
+      "spec_verify_ct": 38,
+      "spec_accept_histogram": [
+        18,
+        16,
+        3,
+        1
+      ],
+      "response_sent_to_client_ts": 1793701937.8878345
+    }
+  },
+  {
+    "id": "chat-008",
+    "category": "chat",
+    "text": "HTTP/1.1 keep-alive allows multiple requests to be sent over a single connection, reducing latency and improving efficiency. However, it can lead to connection exhaustion and increased overhead due to the need for renegotiation. HTTP/2 multiplexing enables multiple requests and responses to be sent over a single connection",
+    "meta": {
+      "id": "3a8fcdfdd0d34609b75b5186c358e210",
+      "finish_reason": {
+        "type": "length",
+        "length": 64
+      },
+      "prompt_tokens": 75,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 64,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.2347252368927002,
+      "spec_accept_rate": 0.41379310344827586,
+      "spec_accept_length": 2.206896551724138,
+      "spec_accept_token_num": 36,
+      "spec_draft_token_num": 87,
+      "spec_verify_ct": 29,
+      "spec_accept_histogram": [
+        10,
+        8,
+        5,
+        6
+      ],
+      "response_sent_to_client_ts": 1793701938.1264453
+    }
+  },
+  {
+    "id": "chat-009",
+    "category": "chat",
+    "text": "Virtual machines (VMs) run an entire operating system, providing full isolation by creating a separate virtual environment. They have slower startup times due to the need to boot the OS and hypervisor, but offer strong security boundaries. Containers, on the other hand, share the host OS kernel, offering faster startup times and better",
+    "meta": {
+      "id": "ba0499b728274d66bb01ab475c3f1c1d",
+      "finish_reason": {
+        "type": "length",
+        "length": 64
+      },
+      "prompt_tokens": 63,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 64,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.3096299171447754,
+      "spec_accept_rate": 0.20512820512820512,
+      "spec_accept_length": 1.641025641025641,
+      "spec_accept_token_num": 24,
+      "spec_draft_token_num": 117,
+      "spec_verify_ct": 39,
+      "spec_accept_histogram": [
+        25,
+        8,
+        2,
+        4
+      ],
+      "response_sent_to_client_ts": 1793701938.4403334
+    }
+  },
+  {
+    "id": "chat-010",
+    "category": "chat",
+    "text": "The Kubernetes control plane manages the cluster's resources and ensures the desired state is maintained. When a Deployment manifest is applied, the control plane validates the YAML file and creates a ReplicaSet. The ReplicaSet ensures that the specified number of pods are running. The control plane then schedules these pods on nodes by checking available resources and",
+    "meta": {
+      "id": "0b932a68567f46b4a0f4a2ff9788c5a3",
+      "finish_reason": {
+        "type": "length",
+        "length": 64
+      },
+      "prompt_tokens": 62,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 64,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.31097960472106934,
+      "spec_accept_rate": 0.21367521367521367,
+      "spec_accept_length": 1.641025641025641,
+      "spec_accept_token_num": 25,
+      "spec_draft_token_num": 117,
+      "spec_verify_ct": 39,
+      "spec_accept_histogram": [
+        21,
+        12,
+        5,
+        1
+      ],
+      "response_sent_to_client_ts": 1793701938.7572265
+    }
+  }
+]

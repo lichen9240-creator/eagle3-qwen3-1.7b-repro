@@ -1,0 +1,202 @@
+[
+  {
+    "id": "chat-001",
+    "category": "chat",
+    "text": "Multi-head self-attention in a Transformer allows the model to focus on different parts of the input simultaneously. Imagine you're looking at a sentence and want to understand both the meaning and the relationships between words. Each head acts like a different \"view\" of the sentence, capturing different aspects of the input. For example,",
+    "meta": {
+      "id": "6d13801182854f21bb95f3f04f1b3000",
+      "finish_reason": {
+        "type": "length",
+        "length": 64
+      },
+      "prompt_tokens": 68,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 64,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.2852776050567627,
+      "response_sent_to_client_ts": 1793700988.2376359
+    }
+  },
+  {
+    "id": "chat-002",
+    "category": "chat",
+    "text": "KV caching and recomputing the full context on every decoding step are two approaches to manage the memory usage in large language models during decoding. KV caching stores key-value pairs of the last few tokens' attention weights, reducing memory consumption by reusing these values across multiple steps. This is particularly effective for long-context documents,",
+    "meta": {
+      "id": "2d844f051b48450685bd64784ebbbcab",
+      "finish_reason": {
+        "type": "length",
+        "length": 64
+      },
+      "prompt_tokens": 68,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 64,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.27520084381103516,
+      "response_sent_to_client_ts": 1793700988.5150661
+    }
+  },
+  {
+    "id": "chat-003",
+    "category": "chat",
+    "text": "Speculative decoding is a technique used in machine translation and sequence modeling to improve efficiency by predicting future outputs before the full sequence is fully generated. In this approach, the model generates a hypothesis and then checks if it is correct. If the hypothesis is correct, it is accepted and used for the final output; if not,",
+    "meta": {
+      "id": "197ab36fe1e94f82ab87df9ed2b4caea",
+      "finish_reason": {
+        "type": "length",
+        "length": 64
+      },
+      "prompt_tokens": 71,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 64,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.27447056770324707,
+      "response_sent_to_client_ts": 1793700988.7937257
+    }
+  },
+  {
+    "id": "chat-004",
+    "category": "chat",
+    "text": "Post-training quantization reduces model parameters to lower bit-widths (e.g., 8-bit), improving inference speed and reducing memory usage but potentially lowering accuracy. Weight-only quantization focuses on quantizing only the weights, which can be more efficient for models with sparse weights, but may require additional steps to handle activation values",
+    "meta": {
+      "id": "0d07197dd38945c2a7f0513422f5bb68",
+      "finish_reason": {
+        "type": "length",
+        "length": 64
+      },
+      "prompt_tokens": 68,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 64,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.2767050266265869,
+      "response_sent_to_client_ts": 1793700989.0744908
+    }
+  },
+  {
+    "id": "chat-005",
+    "category": "chat",
+    "text": "When deciding between retrieval-augmented generation (RAG) and fine-tuning, consider the following framework:\n\n1. **Data Freshness**: RAG is better for up-to-date information, while fine-tuning may require retraining on older data. For example, a legal team using RAG for recent case law",
+    "meta": {
+      "id": "176e499b32e04b4680c1571ce13c0d67",
+      "finish_reason": {
+        "type": "length",
+        "length": 64
+      },
+      "prompt_tokens": 69,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 64,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.27354860305786133,
+      "response_sent_to_client_ts": 1793700989.3527162
+    }
+  },
+  {
+    "id": "chat-006",
+    "category": "chat",
+    "text": "The CAP theorem states that in a distributed system, it is impossible to simultaneously guarantee both consistency and availability for all operations. The theorem introduces three key properties: **Consistency** (all nodes see the same data), **Availability** (all nodes are available and responsive), and **Partition Tolerance** (the system continues",
+    "meta": {
+      "id": "64b1a5e4de024f3fbe740419c6b08b47",
+      "finish_reason": {
+        "type": "length",
+        "length": 64
+      },
+      "prompt_tokens": 57,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 64,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.273329496383667,
+      "response_sent_to_client_ts": 1793700989.6301553
+    }
+  },
+  {
+    "id": "chat-007",
+    "category": "chat",
+    "text": "A B-tree index speeds up a relational database query by allowing the database to quickly locate specific data. Page locality refers to the fact that a B-tree index stores data in pages, which are stored on disk, and the database can access these pages more efficiently by reading them in blocks. Selectivity is the ability of an",
+    "meta": {
+      "id": "9c506df54c86484493c33b7784c985e0",
+      "finish_reason": {
+        "type": "length",
+        "length": 64
+      },
+      "prompt_tokens": 64,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 64,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.2736399173736572,
+      "response_sent_to_client_ts": 1793700989.9078677
+    }
+  },
+  {
+    "id": "chat-008",
+    "category": "chat",
+    "text": "HTTP/1.1 keep-alive allows multiple requests to be sent over a single connection, reducing latency and improving efficiency. However, it can lead to connection exhaustion if many requests are made without being closed. HTTP/2 multiplexing enables multiple requests and responses to be sent over a single connection, improving performance and",
+    "meta": {
+      "id": "36746946e36a41f7bd5e0f8320a64689",
+      "finish_reason": {
+        "type": "length",
+        "length": 64
+      },
+      "prompt_tokens": 75,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 64,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.2739827632904053,
+      "response_sent_to_client_ts": 1793700990.1870563
+    }
+  },
+  {
+    "id": "chat-009",
+    "category": "chat",
+    "text": "Virtual machines (VMs) run an entire operating system, providing full isolation by creating a separate virtual environment. They have slower startup times due to the need to boot the OS and allocate resources. VMs offer high density, as they can run multiple VMs on a single physical host. Security boundaries are strong, as",
+    "meta": {
+      "id": "86aed545698f483fada40183cff9698b",
+      "finish_reason": {
+        "type": "length",
+        "length": 64
+      },
+      "prompt_tokens": 63,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 64,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.2747528553009033,
+      "response_sent_to_client_ts": 1793700990.4642668
+    }
+  },
+  {
+    "id": "chat-010",
+    "category": "chat",
+    "text": "The Kubernetes control plane manages the cluster's resources and ensures the desired state is maintained. When a Deployment manifest is applied, the control plane validates the YAML file and creates a ReplicaSet. The ReplicaSet ensures that the specified number of pods are running. The control plane then schedules these pods on nodes by checking available resources and",
+    "meta": {
+      "id": "bb13a1b66481445ba98841c3ae1d2b21",
+      "finish_reason": {
+        "type": "length",
+        "length": 64
+      },
+      "prompt_tokens": 62,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 64,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.273897647857666,
+      "response_sent_to_client_ts": 1793700990.7407422
+    }
+  }
+]
