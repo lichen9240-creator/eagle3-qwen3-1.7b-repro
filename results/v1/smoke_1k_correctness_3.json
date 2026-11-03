@@ -1,0 +1,90 @@
+[
+  {
+    "id": "chat-001",
+    "category": "chat",
+    "text": "Multi-head self-attention in a Transformer allows the model to focus on different parts of the input simultaneously. Imagine you're looking at a sentence and want to understand",
+    "meta": {
+      "id": "ad694d4c18a3463495e1e4f9adb7120c",
+      "finish_reason": {
+        "type": "length",
+        "length": 32
+      },
+      "prompt_tokens": 68,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 32,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.2307109832763672,
+      "spec_accept_rate": 0.0641025641025641,
+      "spec_accept_length": 1.2307692307692308,
+      "spec_accept_token_num": 5,
+      "spec_draft_token_num": 78,
+      "spec_verify_ct": 26,
+      "spec_accept_histogram": [
+        21,
+        5
+      ],
+      "response_sent_to_client_ts": 1793627672.6829555
+    }
+  },
+  {
+    "id": "chat-002",
+    "category": "chat",
+    "text": "KV caching and recomputing the full context on every decoding step are two approaches to manage the memory usage in large language models during decoding. KV caching stores key",
+    "meta": {
+      "id": "947d22f271544bb5957724c0b75c9db1",
+      "finish_reason": {
+        "type": "length",
+        "length": 32
+      },
+      "prompt_tokens": 68,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 32,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.23210453987121582,
+      "spec_accept_rate": 0.022988505747126436,
+      "spec_accept_length": 1.103448275862069,
+      "spec_accept_token_num": 2,
+      "spec_draft_token_num": 87,
+      "spec_verify_ct": 29,
+      "spec_accept_histogram": [
+        27,
+        2
+      ],
+      "response_sent_to_client_ts": 1793627672.9197457
+    }
+  },
+  {
+    "id": "chat-003",
+    "category": "chat",
+    "text": "Speculative decoding is a technique used in machine translation and sequence modeling to improve efficiency by predicting future outputs before the full sequence is fully generated. In this approach,",
+    "meta": {
+      "id": "3da0807d5dc9431b935da6356d146810",
+      "finish_reason": {
+        "type": "length",
+        "length": 32
+      },
+      "prompt_tokens": 71,
+      "weight_version": "default",
+      "total_retractions": 0,
+      "completion_tokens": 32,
+      "cached_tokens": 0,
+      "cached_tokens_details": null,
+      "e2e_latency": 0.32225537300109863,
+      "spec_accept_rate": 0.07407407407407407,
+      "spec_accept_length": 1.1851851851851851,
+      "spec_accept_token_num": 6,
+      "spec_draft_token_num": 81,
+      "spec_verify_ct": 27,
+      "spec_accept_histogram": [
+        23,
+        2,
+        2
+      ],
+      "response_sent_to_client_ts": 1793627673.2465286
+    }
+  }
+]
