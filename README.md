@@ -33,26 +33,56 @@ ShareGPT / UltraChat 采样 → target 重新生成 → online 训练 1 层 draf
 
 ---
 
-## 关键洞察：2x 需要什么
+## 关键洞察：加速比到底由什么决定（完整推理链）
 
-用实测数据可以推出：
+把加速比拆成两个可测量的量：
 
 ```
-speedup = acceptance / overhead_factor
-overhead_factor = 每轮验证耗时 ÷ 单 token 前向耗时 ≈ 1.87   （v1/v2 都是这个值）
+speedup S = τ / O
+τ = acceptance（每轮接受的 token 数）
+O = 每轮验证耗时 ÷ 单 token 前向耗时
+O  = 1 + k·[(1-r) + δ],   δ = W_draft / W_target（draft 与 target 的权重比）
 ```
 
-- acceptance 2.27 → 1.21x（与实测吻合）
-- **盈亏平衡（1.0x）需要 acceptance ≥ 1.87**
-- **2.0x 需要 acceptance ≥ 3.74**
+下面是完整的推理链，**包括一个被自己的实验推翻的假设**：
 
-对 1.7B 这种小 target，验证 4 个位置的前向并不比 1 个便宜多少（decode 是 memory-bound），
-再叠加 3 步 draft 前向，overhead 就固定在 ~1.87 倍。数据从 21.75k 翻倍到 41.4k，
-acceptance 只涨 0.18——**瓶颈不在数据，在推理配置的 overhead 结构**。
+| 步骤 | 做法 | 结果 |
+|---|---|---|
+| ① 观察 | v2 训完，acceptance 2.268 却只有 1.212x | 差距不在 acceptance |
+| ② 建模 | 反解 O = τ/S = 2.268/1.212 | **O = 1.87**（SGLang） |
+| ③ 假设 | 假设 O 是结构常数 → 2x 需 acceptance ≥ 3.74 | 判定"2x 不可达" |
+| ④ 证伪 | 换引擎（同卡、同 draft、同 benchmark） | **O = 1.24**，假设被推翻 |
+| ⑤ 重算 | 2x 只需 acceptance ≥ 2.48 | 与本已测到的 2.50(tree) 只差一步 |
+| ⑥ 验证 | vLLM + 1024 token + n=4 | **2.135x，2x 达成** |
+| ⑦ 边界 | 换回 128 token 输出 | 上限只有 1.676x —— 2x 依赖长生成 |
+
+**关键教训**：`O` 不是硬件常数，而是**推理栈实现**的函数。
+vLLM 对 EAGLE draft head 做了 torch.compile + CUDA graph，而 SGLang 0.5.9 的 spec 路径是 eager，
+每步多出约 0.5 ms 固定开销——draft 真实计算只有 274MB/717GB/s ≈ 0.38 ms。
+把这 0.5 ms 压掉，O 就从 1.87 掉到 1.24，2x 的门槛从 3.74 降到 2.48。
+
+> 换句话说：**先选对推理栈，再谈调参。** 顺序反了会得出"2x 不可能"的错误结论——我们一开始就是这么错的，
+> 完整复盘见 [docs/2x不可达性分析.md](docs/2x不可达性分析.md)（该文保留了错误推理的原文 + 第 10 节的更正）。
 
 ---
 
-## 完整结果
+## 实验矩阵
+
+| draft | 引擎 | 参数 | 输出长度 | 并发 | 结果 |
+|---|---|---|---|---|---|
+| v1（21.75k） | SGLang 0.5.9 | k=3 | 128 | 1/4/8 | 1.115x |
+| v2（41.4k） | SGLang 0.5.9 | k=3 | 128 | 1/4/8 | 1.212x |
+| v2 | SGLang 0.5.9 | k=2 / 3 / **4** | 128 | 1 | 1.154 / **1.219** / 1.155x |
+| v2 | SGLang 0.5.9 | tree topk=2，8 节点 | 128 | 1 | **1.324x** |
+| AngelSlim | SGLang 0.5.9 | k=2 / 3 | 128 | 1 | 1.116 / 1.149x |
+| AngelSlim | vLLM 0.11.2 | n=2 | 128 / 1024 | 1, 4 | 1.534 / 1.761x |
+| **v2** | **vLLM 0.11.2** | n=2 | 128 / 1024 | 1, 4 | **1.590 / 1.879x** |
+| **v2** | **vLLM 0.11.2** | n=3 | 1024 | 1 | **2.051x** |
+| **v2** | **vLLM 0.11.2** | **n=4** | **1024** | 1 | **🎯 2.135x** |
+
+共 **9 组 draft×引擎×参数 组合**、**5 种输出/并发配置**，覆盖 chain 与 tree 两种 draft 形态。
+
+**完整结果**
 
 ### v2（41,405 条）vs v1（21,750 条）
 
@@ -79,7 +109,7 @@ acceptance 只涨 0.18——**瓶颈不在数据，在推理配置的 overhead �
 
 **详细复现手册见 [REPRODUCE.md](REPRODUCE.md)**（含所有环境坑的修复方法、逐条命令、预期结果）。
 
-数据包在 [Releases](../../releases)：
+数据包在 [Releases](https://github.com/lichen9240-creator/eagle3-qwen3-1.7b-repro/releases/tag/data-v1-v2)：
 - `eagle3-qwen3-1.7b-v1-data.tar.gz`（train 21,750 + eval 1,154 + bench_90）
 - `eagle3-qwen3-1.7b-v2-data.tar.gz`（train 41,405 + eval 2,179 + bench_90）
 
@@ -89,13 +119,14 @@ acceptance 只涨 0.18——**瓶颈不在数据，在推理配置的 overhead �
 
 | 项目 | 值 |
 |---|---|
-| GPU | RTX 4090 48GB（AutoDL Pro，sm_89，450W） |
+| 训练 GPU | RTX 4090 48GB（AutoDL Pro，sm_89，450W） |
 | 驱动 / CUDA | 580.105.08 / CUDA 12.8 |
 | Python | 3.12.16 |
 | PyTorch | 2.9.1+cu128 |
 | Transformers | 4.57.1 |
-| SGLang | 0.5.9 |
+| 推理引擎 | SGLang 0.5.9 / vLLM 0.11.2 |
 | SpecForge | `961ca7c3bb9d1d0a7aaf44db35e76e1f227a7be0` |
+| 复测 GPU | RTX 4080 SUPER 32GB（vLLM 对照 + k 扫描 + tree） |
 
 ---
 
@@ -104,10 +135,13 @@ acceptance 只涨 0.18——**瓶颈不在数据，在推理配置的 overhead �
 ```
 REPRODUCE.md              从零复现的详细手册
 configs/                  draft config、chat 模板、benchmark prompt
-docs/                     复现报告 v1 / v2、执行记录（含全部偏差登记）
+docs/                     完整实验报告、2x 分析、v1 / v2 报告、vLLM 三向对照、执行记录
 scripts/                  SSH/监控等工具
-scripts/pipeline/         按门禁编号的流水线脚本（00 → 78）
-results/v1/ results/v2/   summary、correctness、训练曲线
+scripts/pipeline/         按门禁编号的流水线脚本（00 → 110，含 vLLM 对照）
+results/v1 v2            4090 上的 summary、correctness、训练曲线
+results/ksweep_sglang/    k=2/3/4 扫描（含 baseline）
+results/treesweep_sglang/ tree topk=2、8 节点
+results/vllm vllm_ours vllm_tree   vLLM 对照（AngelSlim / 我们 n=2 / 我们 n=3,4）
 data_samples/             各类数据的前 3 条样例（截断）
 ```
 
@@ -135,7 +169,7 @@ data_samples/             各类数据的前 3 条样例（截断）
 
 ## 说明
 
-- 模型权重、checkpoint 未上传（体积原因），可由 REPRODUCE.md 重新训练得到。
+- 模型权重已发布到 [HuggingFace](https://huggingface.co/Lichen-Creator/Qwen3-1.7B_eagle3)，也可从 [Releases](https://github.com/lichen9240-creator/eagle3-qwen3-1.7b-repro/releases/tag/data-v1-v2) 下载 tar 包。
 - `data_samples/` 只保留每类数据的前 3 条、内容截断到 300 字符，用于说明 schema。
 - ShareGPT / UltraChat 数据遵循其原始许可。
 
