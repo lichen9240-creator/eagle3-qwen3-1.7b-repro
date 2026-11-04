@@ -33,6 +33,27 @@ ShareGPT / UltraChat 采样 → target 重新生成 → online 训练 1 层 draf
 
 ---
 
+## 文档索引
+
+| 文档 | 内容 |
+|---|---|
+| [docs/完整实验报告.md](docs/完整实验报告.md) | **主报告**：数据构建、训练、SGLang/vLLM 对照、与 AngelSlim 比较 |
+| [docs/2x不可达性分析.md](docs/2x不可达性分析.md) | 加速比上限的数学分析（含对"2x 不可达"的自我更正） |
+| [docs/vLLM三向对照.md](docs/vLLM三向对照.md) | 我们 vs AngelSlim vs baseline 的同卡对照 |
+| **[docs/DualDraft-实验报告.md](docs/DualDraft-实验报告.md)** | **衍生实验：GtoA/AtoA 双网络（负结果）+ 损失衰减率扫描** |
+| [docs/复现报告-v1.md](docs/复现报告-v1.md) / [-v2.md](docs/复现报告-v2.md) | 两轮训练的专项报告 |
+| [docs/实验执行记录.md](docs/实验执行记录.md) | 逐项偏差登记 |
+
+### 衍生实验一句话总结
+
+把 EAGLE-3 的 draft 拆成 GtoA + AtoA 两个独立网络**是亏的**（同权重下 τ −0.075，且多 85% 参数）；
+但同一实验发现**损失衰减率被社区两套实现设成了不同值**（EAGLE `0.8^i` vs vLLM Speculators `1.0`），
+实测最优点在 `0.7^i`（step0 占 32.7%），相对 `0.8^i` 提升 **+0.105**。
+详见 [DualDraft 报告](docs/DualDraft-实验报告.md)。
+
+
+---
+
 ## 关键洞察：加速比到底由什么决定（完整推理链）
 
 把加速比拆成两个可测量的量：
