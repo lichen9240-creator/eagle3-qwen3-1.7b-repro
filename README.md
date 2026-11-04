@@ -51,6 +51,10 @@ ShareGPT / UltraChat 采样 → target 重新生成 → online 训练 1 层 draf
 实测最优点在 `0.7^i`（step0 占 32.7%），相对 `0.8^i` 提升 **+0.105**。
 详见 [DualDraft 报告](docs/DualDraft-实验报告.md)。
 
+各组的 checkpoint 已归档到 Release：
+**[dualdraft-arms](https://github.com/lichen9240-creator/eagle3-qwen3-1.7b-repro/releases/tag/dualdraft-arms)**
+（每组一个最优 checkpoint，纯 draft 权重）。
+
 
 ---
 
